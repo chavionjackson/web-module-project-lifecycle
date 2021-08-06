@@ -6,7 +6,8 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      userData: [],
+      userData: {},
+      users: [],
     };
   }
 
@@ -18,13 +19,21 @@ class App extends React.Component {
         this.setState({ userData: res });
       })
       .catch((err) => console.log("oops!", { err }));
+
+    fetch("https://api.github.com/users/chavionjackson/following")
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        this.setState({ users: res });
+      })
+      .catch((err) => console.log("oops!", { err }));
   }
 
   render() {
     return (
       <div className="App">
         <h1>GitHub Friends!</h1>
-        <br/>
+        <br />
         <div className="card" style={{ width: "18rem" }}>
           <img
             src={this.state.userData.avatar_url}
@@ -42,7 +51,7 @@ class App extends React.Component {
             </a>
           </div>
         </div>
-        {/* <Card /> */}
+        {this.state.users.map((user) => <Card key={user.id} user={user} />)}
       </div>
     );
   }
