@@ -14,6 +14,7 @@ class Card extends Component {
           <p className="card-text">
             <li>Followers: {this.props.user.followers_url.length}</li>
             <li>Following: {this.props.user.following_url.length}</li>
+            <li>Projects: {this.props.user.repos_url.length}</li>
           </p>
           <a
             href={this.props.user.html_url}

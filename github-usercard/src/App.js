@@ -34,6 +34,8 @@ class App extends React.Component {
       <div className="App">
         <h1>GitHub Friends!</h1>
         <br />
+        <br/>
+        <div className="card-container" >
         <div className="card" style={{ width: "18rem" }}>
           <img
             src={this.state.userData.avatar_url}
@@ -45,13 +47,17 @@ class App extends React.Component {
             <p className="card-text">
               <li>Followers: {this.state.userData.followers}</li>
               <li>Following: {this.state.userData.following}</li>
+              <li>Projects: {this.state.userData.public_repos}</li>
             </p>
             <a href={this.state.userData.html_url} className="btn btn-primary">
               Profile
             </a>
           </div>
+          {this.state.users.map((user) => (
+            <Card key={user.id} user={user} />
+          ))}
         </div>
-        {this.state.users.map((user) => <Card key={user.id} user={user} />)}
+        </div>
       </div>
     );
   }
